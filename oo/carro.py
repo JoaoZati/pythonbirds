@@ -119,7 +119,7 @@ class Direcao:
         else: self.valor = self.array_direcoes[indice_valor - 1]
 
 class Carro:
-    def __init__(self, motor: object, direcao: object):
+    def __init__(self, direcao: object, motor: object):
         self.motor = motor
         self.direcao = direcao
 
@@ -144,7 +144,6 @@ class Carro:
 
 
 if __name__ == '__main__':
-
     #Encontrando o indice
     lista = ['banana', 'maçã', 'mamão']
     print(lista.index('maçã'))
