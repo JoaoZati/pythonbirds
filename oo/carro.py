@@ -118,7 +118,28 @@ class Direcao:
         if self.valor == self.array_direcoes[0]: self.valor = self.array_direcoes[-1]
         else: self.valor = self.array_direcoes[indice_valor - 1]
 
+class Carro:
+    def __init__(self, motor: object, direcao: object):
+        self.motor = motor
+        self.direcao = direcao
 
+    def calcular_velocidade(self):
+        print(self.motor.velocidade)
+
+    def calcular_direcao(self):
+        print(self.direcao.valor)
+
+    def acelerar(self):
+        self.motor.acelerar()
+
+    def frear(self):
+        self.motor.frear()
+
+    def girar_a_direita(self):
+        self.direcao.girar_a_direita()
+
+    def girar_a_esquerda(self):
+        self.direcao.girar_a_esquerda()
 
 
 
