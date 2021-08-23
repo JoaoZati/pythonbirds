@@ -30,7 +30,7 @@ O   L
     >>> motor.velocidade
     2
     >>> motor.frear()
-    >>> motor.velocidade()
+    >>> motor.velocidade
     1
     >>> motor.frear()
     >>> motor.velocidade
@@ -91,6 +91,7 @@ O   L
     'Oeste'
 """
 
+
 class Motor:
     def __init__(self):
         self.velocidade = 0
@@ -99,24 +100,45 @@ class Motor:
         self.velocidade += 1
 
     def frear(self):
-        if self.velocidade == 0: return
         self.velocidade -= 1
+        self.velocidade = max(0, self.velocidade)
+
 
 class Direcao:
-    array_direcoes = ['Norte', 'Leste', 'Sul', 'Oeste']
+    ARRAY_DIRECOES = ['Norte', 'Leste', 'Sul', 'Oeste']
 
     def __init__(self):
-        self.valor = self.array_direcoes[0]
+        self.valor = self.ARRAY_DIRECOES[0]
 
     def girar_a_direita(self):
-        indice_valor = self.array_direcoes.index(self.valor)
-        if self.valor == self.array_direcoes[-1]: self.valor = self.array_direcoes[0]
-        else: self.valor = self.array_direcoes[indice_valor + 1]
+        indice_valor = self.ARRAY_DIRECOES.index(self.valor)
+        if self.valor == self.ARRAY_DIRECOES[-1]: self.valor = self.ARRAY_DIRECOES[0]
+        else: self.valor = self.ARRAY_DIRECOES[indice_valor + 1]
 
     def girar_a_esquerda(self):
-        indice_valor = self.array_direcoes.index(self.valor)
-        if self.valor == self.array_direcoes[0]: self.valor = self.array_direcoes[-1]
-        else: self.valor = self.array_direcoes[indice_valor - 1]
+        indice_valor = self.ARRAY_DIRECOES.index(self.valor)
+        if self.valor == self.ARRAY_DIRECOES[0]: self.valor = self.ARRAY_DIRECOES[-1]
+        else: self.valor = self.ARRAY_DIRECOES[indice_valor - 1]
+
+
+NORTE = 'Norte'
+SUL = 'Sul'
+LESTE = 'Leste'
+OESTE = 'Oeste'
+
+class DirecaoRenzo:
+    rotacionar_a_direita_dct = {NORTE: SUL, SUL: LESTE, LESTE: OESTE, OESTE: NORTE}
+    rotacionar_a_esquerda_dct = {NORTE: OESTE, SUL: NORTE, LESTE: SUL, OESTE: LESTE}
+
+    def __init__(self):
+        self.valor = NORTE
+
+    def girar_a_direita(self):
+        self.valor = self.rotacionar_a_direita_dct[self.valor]
+
+    def girar_a_esquerda(self):
+        self.valor = self.rotacionar_a_esquerda_dct[self.valor]
+
 
 class Carro:
     def __init__(self, direcao: object, motor: object):
@@ -124,10 +146,10 @@ class Carro:
         self.direcao = direcao
 
     def calcular_velocidade(self):
-        print(self.motor.velocidade)
+        return self.motor.velocidade
 
     def calcular_direcao(self):
-        print(self.direcao.valor)
+        return self.direcao.valor
 
     def acelerar(self):
         self.motor.acelerar()
@@ -142,8 +164,7 @@ class Carro:
         self.direcao.girar_a_esquerda()
 
 
-
 if __name__ == '__main__':
-    #Encontrando o indice
+    # Encontrando o indice
     lista = ['banana', 'maçã', 'mamão']
     print(lista.index('maçã'))
