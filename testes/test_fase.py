@@ -19,7 +19,7 @@ from atores import (Obstaculo, Porco, PassaroVermelho, PassaroAmarelo,
 from fase import Fase, Ponto, EM_ANDAMENTO, VITORIA, DERROTA
 
 
-class AtorFake:
+class AtorFake: #ou mock
     def __init__(self, x=0, y=0):
         self.y = y
         self.x = x

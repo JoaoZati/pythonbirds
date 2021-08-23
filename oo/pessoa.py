@@ -7,7 +7,7 @@ class Pessoa:
         self.filhos = list(filhos)
 
     def comprimentar(self):
-        return f'olá {id(self)}'
+        return f'Olá, meu nome é {self.nome}'
 
     @staticmethod
     def metodo_estatico():
@@ -17,9 +17,18 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):
         return f'a classe {cls} possui {cls.olhos} olhos'
 
+class Homem(Pessoa):
+    def comprimentar(self):
+        comprimentar_da_classe = Pessoa.comprimentar(self) #teria problema com mutante ex...
+        comprimentar_da_classe = super().comprimentar()
+        return f' {comprimentar_da_classe}, Aperto de mão'
+
+class Mutante(Pessoa):
+    olhos = 3
+
 if __name__ == '__main__':
-    luciano = Pessoa(15, nome = 'Luciano' )
-    renzo = Pessoa(35, luciano, nome = 'Renzo')
+    luciano = Homem (15, nome = 'Luciano' )
+    renzo = Mutante(35, luciano, nome = 'Renzo')
     print(renzo.idade)
     print(renzo.filhos)
     for filho in renzo.filhos: print(filho.nome)
@@ -32,7 +41,7 @@ if __name__ == '__main__':
     print(renzo.olhos)
     luciano.olhos = 1
     print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
-    Pessoa.olhos = 3
+    #Pessoa.olhos = 3
     print(luciano.__dict__)
     print(renzo.__dict__)
     print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
@@ -44,3 +53,12 @@ if __name__ == '__main__':
     print(Pessoa.metodo_estatico(), luciano.metodo_estatico())
     print(Pessoa.nome_e_atributos_de_classe(), luciano.nome_e_atributos_de_classe())
 
+    pessoa=Pessoa('Anonimo')
+    print(isinstance(pessoa, Pessoa))
+    print(isinstance(pessoa, Homem))
+    print(isinstance(renzo, Pessoa))
+    print(isinstance(renzo, Homem))
+
+    print(renzo.olhos)
+    print(luciano.comprimentar())
+    print(renzo.comprimentar())
