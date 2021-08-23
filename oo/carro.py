@@ -20,7 +20,7 @@ O   L
 3) Metodo Virar a esquerda
 
     Exemplo:
-    >>> motor = motor()
+    >>> motor = Motor()
     >>> motor.velocidade
     0
     >>> motor.acelerar()
@@ -91,7 +91,7 @@ O   L
     'Oeste'
 """
 
-class motor:
+class Motor:
     def __init__(self):
         self.velocidade = 0
 
@@ -117,6 +117,8 @@ class Direcao:
         indice_valor = self.array_direcoes.index(self.valor)
         if self.valor == self.array_direcoes[0]: self.valor = self.array_direcoes[-1]
         else: self.valor = self.array_direcoes[indice_valor - 1]
+
+
 
 
 
